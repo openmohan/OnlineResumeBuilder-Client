@@ -2,8 +2,8 @@
   background-color: green
 }
 .LinkedInButton{
-
+  cursor: pointer;
 }
-.LinkedInButton : hover{
+.LinkedInButton:hover{
   content : url('/assets/img/SignInActive.png')
 }
