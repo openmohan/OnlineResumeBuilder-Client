@@ -1,0 +1,18 @@
+{
+  "transport": "scp",
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "159.203.139.155",
+  "port": "22",
+  "target": "/home/cloud-user/OnlineResumeBuilder-Client",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**",
+    "node_modules/**"
+  ],
+  "username": "cloud-user",
+  "keyfile": "/home/mohan/.ssh/id_rsa",
+  "watch": [],
+  "passphrase": "Iamironman3210!"
+}

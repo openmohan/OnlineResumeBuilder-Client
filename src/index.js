@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './app.js'
 import NotFound from './components/NotFound.jsx'
 import Home from './components/Home.jsx'
+import EditUser from './components/EditUser.jsx'
 import { Router, Route, Link, browserHistory, IndexRoute,DefaultRoute,Redirect,IndexRedirect  } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import {Provider } from 'react-redux'
@@ -16,6 +17,7 @@ ReactDOM.render(
 	<Route path = "/" component = {App}>
     <IndexRoute component={Home}/>
       <Route path="/mohan" component={Home}/>
+			<Route path="/EditUser" component={EditUser}/>
 	  	<Route path="*" component={NotFound}/>
 	</Route>
 	</Router>
