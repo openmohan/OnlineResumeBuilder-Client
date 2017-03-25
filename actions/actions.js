@@ -32,6 +32,6 @@ export function getUserDetails(res){
 
 export function changeToURL(URL){
  return dispatch => {
-  dispatch(browserHistory.push(URL));
+  browserHistory.push(URL);
 }
 }

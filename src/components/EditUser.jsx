@@ -1,12 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux';
+var _ = require('lodash');
 
 
 var EditUser = React.createClass({
 	render : function(){
 	return(
 			<div>
-				{this.props.user.firstName}
+				{_.get(this.props,'user.userdata.firstName',"")}
 		</div>
 		)
 	}
