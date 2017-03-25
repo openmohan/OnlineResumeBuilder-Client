@@ -8,7 +8,7 @@ var Home = React.createClass({
   render : function(){
   return (
     <div className={styles.greenColor}>
-      MOhan
+      <img className="LinkedInButton" src="/assets/img/SignIn.png"></img>
     </div>
   )}
 })
