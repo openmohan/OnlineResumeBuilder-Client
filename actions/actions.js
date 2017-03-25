@@ -2,19 +2,28 @@ import {LOGIN,USERDETAILS} from './actionTypes.js'
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router'
 
 export function loginUser(){
-  IN.User.authorize(onUserAllows);
+return dispatch => {
+  console.log(dispatch + "One")
+  IN.User.authorize(()=>{dispatch(onUserAllows())});
+  // return {type:"empty",data:{}};
+}
 }
 
 export function onUserAllows(res){
+  return dispatch=>{
   IN.API.Raw("people/~?format=json").method("GET").body().result(function(res){
-    return dispatch => {
+      console.log("getting data")
+      console.log(dispatch+"two")
+
       dispatch(getUserDetails(res));
-      dispatch(changeToURL('/EditUser'))
-    }
+      dispatch(changeToURL('/EditUser'));
+
   });
+}
 }
 
 export function getUserDetails(res){
+  console.log(res)
   return {
     type : USERDETAILS,
     data : res
@@ -22,5 +31,7 @@ export function getUserDetails(res){
 }
 
 export function changeToURL(URL){
-  browserHistory.push(URL)
+ return dispatch => {
+  dispatch(browserHistory.push(URL));
+}
 }

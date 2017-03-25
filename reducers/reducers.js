@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux'
 import {USERDETAILS} from '../actions/actionTypes.js'
+
 function user(state={},action){
+  console.log(action.data)
   switch(action.type){
-    case USERDETAILS : {return Object.assign({},state,{userdata : action.data})}
+    case USERDETAILS : {console.log(action.data);return Object.assign({},state,{userdata : action.data})}
+    case "empty" : return state;
     default : return state;
   }
 }

@@ -1,12 +1,27 @@
 import React from 'react'
+import {connect} from 'react-redux';
+
 
 var EditUser = React.createClass({
 	render : function(){
-	return(		<div>
-Edit User
+	return(
+			<div>
+				{this.props.user.firstName}
 		</div>
 		)
 	}
 })
 
-export default EditUser
+
+const mapStateToProps = (state) => {
+  return {
+    user : state.user,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditUser)
