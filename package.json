@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build-prod": "webpack --config webpack.config.prod.js --progress",
-    "start": "./node_modules/.bin/webpack-dev-server --hot "
+    "start": "./node_modules/.bin/webpack-dev-server --hot --host 0.0.0.0 --port 8080"
   },
   "keywords": [],
   "author": "",

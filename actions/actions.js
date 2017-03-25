@@ -1,7 +1,7 @@
 import {LOGIN,USERDETAILS} from './actionTypes.js'
 
 export function loginUser(){
-  IN.user.authorize(onUserAllows);
+  IN.User.authorize(onUserAllows);
 }
 
 export function onUserAllows(res){
