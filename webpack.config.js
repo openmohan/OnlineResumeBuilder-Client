@@ -3,18 +3,18 @@ var path = require('path');
 
 var config = {
    entry: './src/index.js',
-	
+
    output: {
       path:'./',
       filename: 'build.js',
    },
-	
+
 devServer: {
     historyApiFallback: true,
     contentBase: './',
     hot: true
   },
-	
+
    module: {
       loaders: [
          {
@@ -40,7 +40,7 @@ devServer: {
              }
            ])
          }]
-      
+
    }
 }
 

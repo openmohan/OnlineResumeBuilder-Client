@@ -1,15 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux';
 var _ = require('lodash');
-import WizardComponent from './DataComponents/WizardComponent.jsx'
 
 
-var EditUser = React.createClass({
+var Bio = React.createClass({
 	render : function(){
 	return(
 			<div>
-				<WizardComponent ></WizardComponent>
-			</div>
+        Bio data
+      </div>
 		)
 	}
 })
@@ -26,4 +25,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditUser)
+export default connect(mapStateToProps,mapDispatchToProps)(Bio)
