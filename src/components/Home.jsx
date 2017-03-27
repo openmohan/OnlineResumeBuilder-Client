@@ -10,10 +10,14 @@ var Home = React.createClass({
   componentWillMount: function() {
 
   },
+  changeActiveImage : function(e){
+    console.log(e.target.src)
+    e.target.src = e.target.src.indexOf("/assets/img/SignInActive.png") != -1? "/assets/img/SignIn.png" : "/assets/img/SignInActive.png";
+  },
   render : function(){
   return (
-    <div className={styles.greenColor}>
-      <img className={styles.LinkedInButton} src="/assets/img/SignIn.png" onClick={this.signIn}></img>
+    <div >
+      <img className={styles.LinkedInButton} src="/assets/img/SignIn.png" onClick={this.signIn} onMouseOver={this.changeActiveImage} onMouseLeave={this.changeActiveImage}></img>
     </div>
   )}
 })

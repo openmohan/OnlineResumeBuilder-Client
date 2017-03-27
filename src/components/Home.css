@@ -4,6 +4,15 @@
 .LinkedInButton{
   cursor: pointer;
 }
-.LinkedInButton:hover{
+.LinkedInButton:before {
+  content : url('/assets/img/SignInActive.png');
+  width:0;
+  height:0;
+  visibility:hidden;
+}
+
+
+
+.LinkedInButtons:hover{
   content : url('/assets/img/SignInActive.png')
 }
