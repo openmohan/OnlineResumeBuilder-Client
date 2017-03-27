@@ -7,7 +7,7 @@ var Education = React.createClass({
 	render : function(){
 	return(
 			<div>
-        Education data
+        {_.get(this.props,'user.userdata.headline',"")}
       </div>
 		)
 	}

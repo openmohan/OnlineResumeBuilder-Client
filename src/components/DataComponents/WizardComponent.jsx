@@ -7,8 +7,9 @@ import Education from './Education.jsx'
 
 const steps =
     [
-      {name: 'Step 1', component: <Bio />},
-      {name: 'Step 2', component: <Education />},
+      {name: 'Basic', component: <Bio />},
+      {name: 'Education', component: <Education />},
+      {name: 'Work', component: <Education />}
     ]
 
 var WizardComponent = React.createClass({

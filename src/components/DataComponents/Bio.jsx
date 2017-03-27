@@ -7,7 +7,7 @@ var Bio = React.createClass({
 	render : function(){
 	return(
 			<div>
-        Bio data
+        {_.get(this.props,'user.userdata.firstName',"")}
       </div>
 		)
 	}
