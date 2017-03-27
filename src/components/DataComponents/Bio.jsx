@@ -7,7 +7,7 @@ var Bio = React.createClass({
 	render : function(){
 	return(
 			<div>
-        {_.get(this.props,'user.userdata.firstName',"")}
+        <label> Name :  </label><input type="text" defaultValue={_.get(this.props,'user.userdata.firstName',"User")}  /> 
       </div>
 		)
 	}
