@@ -7,7 +7,7 @@ import WizardComponent from './DataComponents/WizardComponent.jsx'
 var EditUser = React.createClass({
 	render : function(){
 	return(
-			<div>
+			<div className="container">
 				<WizardComponent ></WizardComponent>
 			</div>
 		)
