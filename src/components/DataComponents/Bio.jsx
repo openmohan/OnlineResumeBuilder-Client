@@ -13,7 +13,7 @@ var Bio = React.createClass({
 		<div className="">
 		<form className="form-horizontal">
 			<div className="form-group">
-        <label className="control-label col-sm-2" for="name"> Name :  </label><div className="col-sm-10"><input id="name" className="form-control" placeholder="Name" type="text" defaultValue={_.get(this.props,'user.userdata.firstName',"User")+' '+_.get(this.props,'user.userdata.lastName',"User")} onChange={(e)=>this.handleTextChange("name",e)}/></div>
+        <label className="control-label col-sm-2" for="name"> Name :  </label><div className="col-sm-10"><input id="name" className="form-control" placeholder="Name" type="text" defaultValue={(_.get(this.props,'user.userdata.firstName',"User")+' '+_.get(this.props,'user.userdata.lastName',"User")) || "lol"} onChange={(e)=>this.handleTextChange("name",e)}/></div>
       </div>
 			<div className="form-group">
         <label className="control-label col-sm-2" for="email"> E-Mail :  </label><div className="col-sm-10"><input id="email" className="form-control" type="email" placeholder="E-Mail" type="text" defaultValue={_.get(this.props,'user.userdata.email',"User")} onChange={(e)=>this.handleTextChange("email",e)}/></div>

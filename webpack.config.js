@@ -1,5 +1,7 @@
 var combineLoaders = require('webpack-combine-loaders');
 var path = require('path');
+var webpack = require('webpack');
+
 
 var config = {
    entry: './src/index.js',
@@ -8,6 +10,9 @@ var config = {
       path:'./',
       filename: 'build.js',
    },
+   plugins: [
+  new webpack.HotModuleReplacementPlugin()
+],
 
 devServer: {
     historyApiFallback: true,
@@ -17,15 +22,11 @@ devServer: {
 
    module: {
       loaders: [
-         {
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loader: "babel-loader",
-				    exclude: path.join(__dirname, 'node_modules'),
-            query: {
-               presets: ['es2015', 'react']
-            }
-         },
+        {
+          test: /\.(js|jsx)$/,
+       exclude: /node_modules/,
+       loaders: ['react-hot', 'babel?presets[]=es2015,presets[]=react']
+   },
          {
            test: /\.css$/,
            loader: combineLoaders([
