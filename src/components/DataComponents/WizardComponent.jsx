@@ -16,7 +16,7 @@ var WizardComponent = React.createClass({
     const steps =
         [
           {name: 'Basic', component: <Bio user = {this.props.user} updateStoreData={this.props.updateStoreData}/>},
-          {name: 'Education', component: <Education user = {this.props.user}/>},
+          {name: 'Education', component: <Education user = {this.props.user} updateStoreData={this.props.updateStoreData}/>},
           {name: 'Work', component: <Education />}
         ]
 	return(
