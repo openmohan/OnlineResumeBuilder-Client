@@ -6,8 +6,8 @@ var _ = require('lodash');
 
 
  class Education extends React.Component{
-	 constructor(){
-		 super();
+	 constructor(props){
+		 super(props);
 		//  this.updateEducationComponents=this.updateEducationComponents.bind(this)
 
 	 }
@@ -23,6 +23,9 @@ var _ = require('lodash');
 		console.log(this.state)
 	}
 	updateEducationComponents(event,index){
+    console.log(this.state.education)
+    let education = this.state.education;
+
 		// console.log(event.target);
 		// console.log(event.currentTarget.getElementById("institute").value)
 		var updates = {
@@ -31,9 +34,10 @@ var _ = require('lodash');
 			"end-date" : event.currentTarget.querySelector('#end-date').value,
 			"degree" : event.currentTarget.querySelector('#degree').value
 		}
-		console.log(updates)
+    education[index] = updates;
+    this.setState({"education" : education})
+		// console.log(updates)
 		// console.log(this.state.education[index])
-		console.log(this.state)
 	}
 	addNewEducation(){
 		var education = this.state.education;
@@ -78,6 +82,7 @@ export default connect(mapStateToProps,mapDispatchToProps)(Education)
 
 var SingleEducationComponent = React.createClass({
 	updateEducationComponent : function(event,index){
+
 		this.props.updateEducationComponents(event,index);
 		// console.log(index,event);
 		// console.log(this.state)

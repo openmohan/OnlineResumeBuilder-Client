@@ -17,7 +17,8 @@ var WizardComponent = React.createClass({
 	return(
 			<div>
         <div className='step-progress'>
-            <StepZilla steps={steps}></StepZilla>
+            <StepZilla steps={steps}
+              ></StepZilla>
         </div>
 		    </div>
 		)

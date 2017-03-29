@@ -3,12 +3,21 @@ import {connect} from 'react-redux';
 var _ = require('lodash');
 
 
-var Bio = React.createClass({
-	handleTextChange : function(name,e){
+class Bio extends React.Component{
+	constructor(props){
+		super(props)
+		this._validateOnDemand = true; // this flag enables onBlur validation as user fills forms
+		this.isValidated =  this.isValidated.bind(this)
+	}
+	handleTextChange(name,e){
 		this.setState({[name] : e.target.value})
 		console.log(this.state)
-	},
-	render : function(){
+	}
+	isValidated(){
+		console.log("kk");
+		return true;
+	}
+	render(){
 	return(
 		<div className="">
 		<form className="form-horizontal">
@@ -34,7 +43,7 @@ var Bio = React.createClass({
 	</div>
 		)
 	}
-})
+}
 
 
 const mapStateToProps = (state) => {
