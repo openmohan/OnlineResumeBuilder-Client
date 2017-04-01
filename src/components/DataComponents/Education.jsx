@@ -48,7 +48,8 @@ import { sortable } from 'react-sortable';
 			"school":event.currentTarget.querySelector('#institute').value,
 			"start-date" : event.currentTarget.querySelector('#start-date').value,
 			"end-date" : event.currentTarget.querySelector('#end-date').value,
-			"degree" : event.currentTarget.querySelector('#degree').value
+			"degree" : event.currentTarget.querySelector('#degree').value,
+      "percentage" : event.currentTarget.querySelector('#percentage').value
 		}
     education[index] = updates;
     this.setState({"education" : education})
