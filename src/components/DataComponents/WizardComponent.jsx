@@ -4,6 +4,7 @@ var _ = require('lodash');
 import StepZilla from 'react-stepzilla'
 import Bio from './Bio.jsx'
 import Education from './Education.jsx'
+import Work from './Work.jsx'
 import EducationDraggable from './EducationDraggable.jsx'
 import {updateStoreData} from '../../../actions/actions'
 
@@ -18,7 +19,7 @@ var WizardComponent = React.createClass({
         [
           {name: 'Basic', component: <Bio user = {this.props.user} updateStoreData={this.props.updateStoreData}/>},
           {name: 'Education', component: <EducationDraggable user = {this.props.user} updateStoreData={this.props.updateStoreData}/>},
-          {name: 'Work', component: <EducationDraggable user = {this.props.user} updateStoreData={this.props.updateStoreData}  />}
+          {name: 'Work', component: <Work user = {this.props.user} updateStoreData={this.props.updateStoreData}  />}
         ]
 	return(
 			<div>

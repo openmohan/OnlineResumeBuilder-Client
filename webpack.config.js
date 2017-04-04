@@ -11,7 +11,14 @@ var config = {
       filename: 'build.js',
    },
    plugins: [
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    }
+  }),
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.DedupePlugin()
 ],
 
 devServer: {
