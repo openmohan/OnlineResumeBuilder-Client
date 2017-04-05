@@ -37,7 +37,7 @@ var SingleWorkComponent = React.createClass({
 		        <label className="control-label col-sm-2" for="company"> Location :  </label><div className="col-sm-4"><input id="location" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'work.location',"")} /></div>
 		      </div>
           <div className="form-group">
-            <label className="control-label col-sm-2" for="currentCompany">  Title :  </label><div className="col-sm-10"><label className={styles.switch}> <input type="checkbox"/> <div className={styles.slider +' '+styles.round}></div></label></div>
+            <label className="control-label col-sm-2" for="currentCompany">  Is current company :  </label><div className="col-sm-10"><label className={styles.switch}> <input type="checkbox" defaultChecked={_.get(this.props,'work.iscurrent',"false")} id="iscurrent"/> <div className={styles.slider +' '+styles.round}></div></label></div>
         </div>
 					<div className="form-group">
 						<label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'work.from',"")} /></div>
@@ -131,14 +131,15 @@ export default class DraggableComponent extends Component{
      "to" : event.currentTarget.querySelector('#to').value,
      "company" : event.currentTarget.querySelector('#company').value,
      "percentage" : event.currentTarget.querySelector('#percentage').value,
-     "location" : event.currentTarget.querySelector('#location').value
+     "location" : event.currentTarget.querySelector('#location').value,
+     "iscurrent" : event.currentTarget.querySelector('#iscurrent').checked
    }
    work[index] = updates;
    this.setState({"work" : work})
  }
  addNewWork(){
    var work = this.state.work;
-   work.push({"title":"","from":"","to":"","company":"","percentage":""});
+   work.push({"title":"","from":"","to":"","company":"","iscurrent":false,"location":"","percentage":""});
    this.setState({work : work})
  }
  captureWorkDetails(e){
