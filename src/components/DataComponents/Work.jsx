@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove,SortableHandle} from 'react-sortable-hoc';
+import styles from './css/switch.css'
 
 const DragHandle = SortableHandle(() => <span>::</span>); // This can be any component you want
 
@@ -29,14 +30,18 @@ var SingleWorkComponent = React.createClass({
         <DragHandle />
 
 					<div className="form-group">
-		        <label className="control-label col-sm-2" for="institute"> Institute Name :  </label><div className="col-sm-10"><input id="institute" className="form-control" placeholder="Institute Name" type="text"  value={_.get(this.props,'work.school',"")}  /></div>
+		        <label className="control-label col-sm-2" for="title">  Title :  </label><div className="col-sm-10"><input id="title" className="form-control" placeholder="Institute Name" type="text"  value={_.get(this.props,'work.title',"")}  /></div>
         </div>
 					<div className="form-group">
-		        <label className="control-label col-sm-2" for="degree"> Degree :  </label><div className="col-sm-10"><input id="degree" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'work.degree',"")} /></div>
+		        <label className="control-label col-sm-2" for="company"> Company :  </label><div className="col-sm-4"><input id="company" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'work.company',"")} /></div>
+		        <label className="control-label col-sm-2" for="company"> Location :  </label><div className="col-sm-4"><input id="location" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'work.location',"")} /></div>
 		      </div>
+          <div className="form-group">
+            <label className="control-label col-sm-2" for="currentCompany">  Title :  </label><div className="col-sm-10"><label className={styles.switch}> <input type="checkbox"/> <div className={styles.slider +' '+styles.round}></div></label></div>
+        </div>
 					<div className="form-group">
-						<label className="control-label col-sm-2" for={"start-date"}> Start date :  </label><div className="col-sm-4"><input id={"start-date"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'work.start-date',"")} /></div>
-						<label className="control-label col-sm-2" for={"end-date"}> End date :  </label><div className="col-sm-4"><input id={"end-date"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'work.end-date',"")} /></div>
+						<label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'work.from',"")} /></div>
+						<label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'work.to',"")} /></div>
 					</div>
           <div className="form-group">
 		        <label className="control-label col-sm-2" for="percentage"> percentage :  </label><div className="col-sm-4"><input id="percentage" className="form-control" type="email" placeholder="Percentage % " type="text" value={_.get(this.props,'work.percentage',"")} /></div>
@@ -112,7 +117,7 @@ export default class DraggableComponent extends Component{
    this.setState({work:_.get(this.props,"user.userdata.work",[])})
  }
  componentDidMount(){
-   // this.setState({work : (_.get(this.props,'user.userdata.work',[{"school":"TMHNU","start-date":"2","end-date":"3","degree":"12th","percentage":"98"},{"school":"Sona","start-date":"2","end-date":"3","degree":"12th","percentage":"98"}]))})
+   // this.setState({work : (_.get(this.props,'user.userdata.work',[{"title":"TMHNU","from":"2","to":"3","company":"12th","percentage":"98"},{"title":"Sona","from":"2","to":"3","company":"12th","percentage":"98"}]))})
  }
  handleTextChange(name,e){
    this.setState({[name] : e.target.value})
@@ -121,18 +126,19 @@ export default class DraggableComponent extends Component{
    let work = this.state.work;
 
    var updates = {
-     "school":event.currentTarget.querySelector('#institute').value,
-     "start-date" : event.currentTarget.querySelector('#start-date').value,
-     "end-date" : event.currentTarget.querySelector('#end-date').value,
-     "degree" : event.currentTarget.querySelector('#degree').value,
-     "percentage" : event.currentTarget.querySelector('#percentage').value
+     "title":event.currentTarget.querySelector('#title').value,
+     "from" : event.currentTarget.querySelector('#from').value,
+     "to" : event.currentTarget.querySelector('#to').value,
+     "company" : event.currentTarget.querySelector('#company').value,
+     "percentage" : event.currentTarget.querySelector('#percentage').value,
+     "location" : event.currentTarget.querySelector('#location').value
    }
    work[index] = updates;
    this.setState({"work" : work})
  }
  addNewWork(){
    var work = this.state.work;
-   work.push({"school":"","start-date":"","end-date":"","degree":"","percentage":""});
+   work.push({"title":"","from":"","to":"","company":"","percentage":""});
    this.setState({work : work})
  }
  captureWorkDetails(e){
