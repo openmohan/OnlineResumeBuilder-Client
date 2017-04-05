@@ -30,11 +30,11 @@ var SingleWorkComponent = React.createClass({
         <DragHandle />
 
 					<div className="form-group">
-		        <label className="control-label col-sm-2" for="title">  Title :  </label><div className="col-sm-10"><input id="title" className="form-control" placeholder="Institute Name" type="text"  value={_.get(this.props,'work.title',"")}  /></div>
+		        <label className="control-label col-sm-2" for="title">  Title :  </label><div className="col-sm-10"><input id="title" className="form-control" placeholder="eg: Software Developer" type="text"  value={_.get(this.props,'work.title',"")}  /></div>
         </div>
 					<div className="form-group">
-		        <label className="control-label col-sm-2" for="company"> Company :  </label><div className="col-sm-4"><input id="company" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'work.company',"")} /></div>
-		        <label className="control-label col-sm-2" for="company"> Location :  </label><div className="col-sm-4"><input id="location" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'work.location',"")} /></div>
+		        <label className="control-label col-sm-2" for="company"> Company :  </label><div className="col-sm-4"><input id="company" className="form-control" type="email" placeholder="eg: Zoho Corp" type="text" value={_.get(this.props,'work.company',"")} /></div>
+		        <label className="control-label col-sm-2" for="company"> Location :  </label><div className="col-sm-4"><input id="location" className="form-control" type="email" placeholder="eg: Chennai" type="text" value={_.get(this.props,'work.location',"")} /></div>
 		      </div>
           <div className="form-group">
             <label className="control-label col-sm-2" for="currentCompany">  Is current company :  </label><div className="col-sm-10"><label className={styles.switch}> <input type="checkbox" defaultChecked={_.get(this.props,'work.iscurrent',"false")} id="iscurrent"/> <div className={styles.slider +' '+styles.round}></div></label></div>
@@ -44,7 +44,7 @@ var SingleWorkComponent = React.createClass({
 						<label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'work.to',"")} /></div>
 					</div>
           <div className="form-group">
-		        <label className="control-label col-sm-2" for="percentage"> percentage :  </label><div className="col-sm-4"><input id="percentage" className="form-control" type="email" placeholder="Percentage % " type="text" value={_.get(this.props,'work.percentage',"")} /></div>
+		        <label className="control-label col-sm-2" for="description"> Description :  </label><div className="col-sm-10"><textarea id="description" className="form-control" type="textarea" placeholder="I developed XXX and YYY " type="text" value={_.get(this.props,'work.description',"")} /></div>
 		      </div>
 			</div>
 		)
@@ -83,7 +83,7 @@ console.log(work)
     console.log("mohan")
     console.log(this.props.work)
 
-    return <SortableList work={this.props.work} updateWorkComponents={this.props.updateWorkComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)}  useDragHandle={true} axis="y" lockAxis="y" />;
+    return <SortableList work={this.props.work} updateWorkComponents={this.props.updateWorkComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)} pressDelay="200"  useDragHandle={true} axis="y" lockAxis="y" />;
   }
 }
 
@@ -117,7 +117,7 @@ export default class DraggableComponent extends Component{
    this.setState({work:_.get(this.props,"user.userdata.work",[])})
  }
  componentDidMount(){
-   // this.setState({work : (_.get(this.props,'user.userdata.work',[{"title":"TMHNU","from":"2","to":"3","company":"12th","percentage":"98"},{"title":"Sona","from":"2","to":"3","company":"12th","percentage":"98"}]))})
+   // this.setState({work : (_.get(this.props,'user.userdata.work',[{"title":"TMHNU","from":"2","to":"3","company":"12th","description":"98"},{"title":"Sona","from":"2","to":"3","company":"12th","description":"98"}]))})
  }
  handleTextChange(name,e){
    this.setState({[name] : e.target.value})
@@ -130,7 +130,7 @@ export default class DraggableComponent extends Component{
      "from" : event.currentTarget.querySelector('#from').value,
      "to" : event.currentTarget.querySelector('#to').value,
      "company" : event.currentTarget.querySelector('#company').value,
-     "percentage" : event.currentTarget.querySelector('#percentage').value,
+     "description" : event.currentTarget.querySelector('#description').value,
      "location" : event.currentTarget.querySelector('#location').value,
      "iscurrent" : event.currentTarget.querySelector('#iscurrent').checked
    }
@@ -139,7 +139,7 @@ export default class DraggableComponent extends Component{
  }
  addNewWork(){
    var work = this.state.work;
-   work.push({"title":"","from":"","to":"","company":"","iscurrent":false,"location":"","percentage":""});
+   work.push({"title":"","from":"","to":"","company":"","iscurrent":false,"location":"","description":""});
    this.setState({work : work})
  }
  captureWorkDetails(e){
