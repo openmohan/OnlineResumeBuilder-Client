@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove,SortableHandle} from 'react-sortable-hoc';
 import styles from './css/switch.css'
 
-const DragHandle = SortableHandle(() => <span>::</span>); // This can be any component you want
+const DragHandle = SortableHandle(() => <span id="dummy"> ::</span>); // This can be any component you want
 
 /* Work component - Single */
 const SortableItem = SortableElement(function({skills,alertme,updateWorkComponents,id}){
@@ -26,8 +26,8 @@ var SingleWorkComponent = React.createClass({
     console.log(this.props)
     console.log("-----From single------")
 		return(
-      <tr onChange={(event)=>this.updateWorkComponent(event,this.props.index)}>
-        <td>
+      <tr onChange={(event)=>this.updateWorkComponent(event,this.props.index)} className="table tr" >
+        <td className="table td">
           <DragHandle />
           <input type="text" id="skillname" value={_.get(this.props,'skills.skillname',"")} />
 
@@ -43,8 +43,8 @@ const SortableList = SortableContainer(function({skills,alertme,updateWorkCompon
 console.log("confuse")
 console.log(skills)
   return (
-    <table className="">
-        <thead>
+    <table className="table">
+        <thead >
           <tr>
           <th>Skill</th>
           <th>Experience</th>

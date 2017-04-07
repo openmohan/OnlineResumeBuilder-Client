@@ -29,21 +29,21 @@ var SingleWorkComponent = React.createClass({
 			<div className="well well-lg" onChange={(event)=>this.updateWorkComponent(event,this.props.index)} >
         <DragHandle />
 
-					<div className="form-group">
+					<div className="form-horizontal form-group">
 		        <label className="control-label col-sm-2" for="title">  Title :  </label><div className="col-sm-10"><input id="title" className="form-control" placeholder="eg: Software Developer" type="text"  value={_.get(this.props,'work.title',"")}  /></div>
         </div>
-					<div className="form-group">
+					<div className="form-horizontal form-group">
 		        <label className="control-label col-sm-2" for="company"> Company :  </label><div className="col-sm-4"><input id="company" className="form-control" type="email" placeholder="eg: Zoho Corp" type="text" value={_.get(this.props,'work.company',"")} /></div>
 		        <label className="control-label col-sm-2" for="company"> Location :  </label><div className="col-sm-4"><input id="location" className="form-control" type="email" placeholder="eg: Chennai" type="text" value={_.get(this.props,'work.location',"")} /></div>
 		      </div>
-          <div className="form-group">
+          <div className="form-horizontal form-group">
             <label className="control-label col-sm-2" for="currentCompany">  Is current company :  </label><div className="col-sm-10"><label className={styles.switch}> <input type="checkbox" defaultChecked={_.get(this.props,'work.iscurrent',"false")} id="iscurrent"/> <div className={styles.slider +' '+styles.round}></div></label></div>
         </div>
-					<div className="form-group">
+					<div className="form-horizontal form-group">
 						<label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'work.from',"")} /></div>
 						<label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'work.to',"")} /></div>
 					</div>
-          <div className="form-group">
+          <div className="form-horizontal form-group">
 		        <label className="control-label col-sm-2" for="description"> Description :  </label><div className="col-sm-10"><textarea id="description" className="form-control" type="textarea" placeholder="I developed XXX and YYY " type="text" value={_.get(this.props,'work.description',"")} /></div>
 		      </div>
 			</div>
