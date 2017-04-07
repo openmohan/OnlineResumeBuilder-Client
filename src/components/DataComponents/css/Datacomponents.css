@@ -1,0 +1,4 @@
+td {
+    box-sizing: border-box;
+    display: table-cell;
+}
