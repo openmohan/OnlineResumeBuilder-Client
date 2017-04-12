@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove,SortableHandle} from 'react-sortable-hoc';
 import styles from './css/switch.css'
+import DragHandle from './DragHandle.jsx'
 
-const DragHandle = SortableHandle(() => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 9H4v2h16V9zM4 15h16v-2H4v2z"/></svg>); // This can be any component you want
 
 /* Work component - Single */
 const SortableItem = SortableElement(function({project,alertme,updateWorkComponents,id}){

@@ -105,3 +105,12 @@ ol.progtrckr li.progtrckr-done:hover:before {
 textarea {
   resize: vertical;
 }
+.handler:hover{
+  cursor: move;
+}
+.handler{
+  cursor: move;
+}
+.handler:active{
+  cursor: move;
+}

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove,SortableHandle} from 'react-sortable-hoc';
+import DragHandle from './DragHandle.jsx'
 
-const DragHandle = SortableHandle(() => <span>::</span>); // This can be any component you want
 
 /* Education component - Single */
 const SortableItem = SortableElement(function({education,alertme,updateEducationComponents,id}){

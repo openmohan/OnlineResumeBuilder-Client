@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove,SortableHandle} from 'react-sortable-hoc';
 import styles from './css/Datacomponents.css'
+import DragHandle from './DragHandle.jsx'
 
-const DragHandle = SortableHandle(() => <span id="dummy"> ::</span>); // This can be any component you want
 
 /* Work component - Single */
 const SortableItem = SortableElement(function({skills,alertme,updateWorkComponents,id}){
