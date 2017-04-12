@@ -8,6 +8,8 @@ import Work from './Work.jsx'
 import EducationDraggable from './EducationDraggable.jsx'
 import Skills from './Skills.jsx'
 import Achivements from './Achivements.jsx'
+import LinkConfigurer from './linkConfigurer.jsx'
+import Final from './Final.jsx'
 import Projects from './Projects.jsx'
 import {updateStoreData} from '../../../actions/actions'
 
@@ -25,7 +27,9 @@ var WizardComponent = React.createClass({
           {name: 'Work', component: <Work user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
           {name: 'Skills', component: <Skills user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
           {name: 'Projects', component: <Projects user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
-          {name: 'Achivements', component: <Achivements user = {this.props.user} updateStoreData={this.props.updateStoreData}  />}
+          {name: 'Achivements', component: <Achivements user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
+          {name: 'Link', component: <LinkConfigurer user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
+          {name: 'Final', component: <Final user = {this.props.user} updateStoreData={this.props.updateStoreData}  />}
         ]
 	return(
 			<div>
