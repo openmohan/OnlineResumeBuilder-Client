@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 import {SortableContainer, SortableElement, arrayMove,SortableHandle} from 'react-sortable-hoc';
-import styles from './css/switch.css'
+import styles from './css/Datacomponents.css'
 
 const DragHandle = SortableHandle(() => <span id="dummy"> ::</span>); // This can be any component you want
 
@@ -26,13 +26,14 @@ var SingleWorkComponent = React.createClass({
     console.log(this.props)
     console.log("-----From single------")
 		return(
-      <tr onChange={(event)=>this.updateWorkComponent(event,this.props.index)} className="table tr" >
-        <td className="table td">
+      <tr onChange={(event)=>this.updateWorkComponent(event,this.props.index)} className="tr" >
+        <td className={styles.tdData}>
           <DragHandle />
-          <input type="text" id="skillname" value={_.get(this.props,'skills.skillname',"")} />
+          <input type="text" id="skillname" value={_.get(this.props,'skills.skillname',"")} placeholder="Java" />
 
     </td>
-    <td><input type="text" id="experience" value={_.get(this.props,'skills.experience',"")}/> </td>
+    <td className={styles.tdData}><input type="text" id="experience" value={_.get(this.props,'skills.experience',"")} placeholder="1.5"/> </td>
+    <td className={styles.tdData}><input type="text" id="rating" value={_.get(this.props,'skills.rating',"")} placeholder="7.5"/> </td>
     </tr>
 		)
 	}
@@ -47,7 +48,8 @@ console.log(skills)
         <thead >
           <tr>
           <th>Skill</th>
-          <th>Experience</th>
+          <th>Experience(in years)</th>
+          <th>Rating(x/10)</th>
           </tr>
         </thead>
         <tbody>
@@ -123,13 +125,14 @@ export default class DraggableComponent extends Component{
    var updates = {
      "skillname":event.currentTarget.querySelector('#skillname').value,
      "experience" : event.currentTarget.querySelector('#experience').value,
+     "rating" : event.currentTarget.querySelector('#rating').value
    }
    skills[index] = updates;
    this.setState({"skills" : skills})
  }
  addNewWork(){
    var skills = this.state.skills;
-   skills.push({"skillname":"","experience":""});
+   skills.push({"skillname":"","experience":"","rating":""});
    this.setState({skills : skills})
  }
  captureWorkDetails(e){
