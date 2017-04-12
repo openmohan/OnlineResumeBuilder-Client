@@ -34,10 +34,9 @@ var SingleWorkComponent = React.createClass({
         </div>
         <div className="form-horizontal form-group">
           <label className="control-label col-sm-2" for="company"> Company :  </label><div className="col-sm-4"><input id="company" className="form-control" type="email" placeholder="eg: Zoho Corp" type="text" value={_.get(this.props,'project.company',"")} /></div>
-        </div>
-        <div className="form-horizontal form-group">
-          <label className="control-label col-sm-2" for="currentCompany">  Is Opensource :  </label><div className="col-sm-10"><label className={styles.switch}> <input type="checkbox" defaultChecked={_.get(this.props,'project.isopensource',"false")} id="isopensource"/> <div className={styles.slider +' '+styles.round}></div></label></div>
-        </div>
+            <label className="control-label col-sm-2" for="currentCompany">  Is Opensource :  </label><div className="col-sm-4"><label className={styles.switch}> <input type="checkbox" defaultChecked={_.get(this.props,'project.isopensource',"false")} id="isopensource"/> <div className={styles.slider +' '+styles.round}></div></label></div>
+
+      </div>
         <div className="form-horizontal form-group">
           <label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'project.from',"")} /></div>
           <label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'project.to',"")} /></div>
