@@ -41,8 +41,6 @@ var SingleWorkComponent = React.createClass({
 
 
 const SortableList = SortableContainer(function({skills,alertme,updateWorkComponents}){
-console.log("confuse")
-console.log(skills)
   return (
     <table className="table">
         <thead >
@@ -77,8 +75,6 @@ console.log(skills)
     // alert("clicked me")
   }
   render() {
-    console.log("mohan")
-    console.log(this.props.skills)
 
     return <SortableList skills={this.props.skills} updateWorkComponents={this.props.updateWorkComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)} pressDelay="200"  useDragHandle={true} axis="y" lockAxis="y" />;
   }

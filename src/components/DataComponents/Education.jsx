@@ -33,7 +33,7 @@ class Education extends React.Component{
     }
   }
   componentWillMount(){
-    this.setState({education:_.get(this.props,"user.userdata.education",[])})
+    this.setState({education:_.get(this.props,"user.userdata.education.values",[])})
   }
   componentDidMount(){
     // this.setState({education : (_.get(this.props,'user.userdata.education',[{"school":"TMHNU","start-date":"2","end-date":"3","degree":"12th","percentage":"98"},{"school":"Sona","start-date":"2","end-date":"3","degree":"12th","percentage":"98"}]))})

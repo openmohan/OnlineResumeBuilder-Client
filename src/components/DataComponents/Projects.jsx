@@ -54,8 +54,6 @@ var SingleWorkComponent = React.createClass({
 
 
 const SortableList = SortableContainer(function({project,alertme,updateWorkComponents}){
-  console.log("confuse")
-  console.log(project)
   return (
     <ul>
       {project.map((value, index) => (

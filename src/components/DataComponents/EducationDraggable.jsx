@@ -48,8 +48,6 @@ var SingleEducationComponent = React.createClass({
 
 
 const SortableList = SortableContainer(function({education,alertme,updateEducationComponents}){
-  console.log("confuse")
-  console.log(education)
   return (
     <ul>
       {education.map((value, index) => (
@@ -75,8 +73,6 @@ class SortableComponent extends Component {
     // alert("clicked me")
   }
   render() {
-    console.log("mohan")
-    console.log(this.props.education)
 
     return <SortableList education={this.props.education} updateEducationComponents={this.props.updateEducationComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)}  useDragHandle={true} axis="y" lockAxis="y" />;
   }
@@ -148,14 +144,12 @@ export default class DraggableComponent extends Component{
   }
   onSortEnd({oldIndex, newIndex}){
 
-    console.log(this.state)
     this.setState({
       education: arrayMove(this.state.education, oldIndex, newIndex),
     });
   };
   render(){
     var education = this.state.education
-    console.log(education)
     return(
       <div ref="EducationComponentMaster" className="" >
         <form className="form-horizontal">

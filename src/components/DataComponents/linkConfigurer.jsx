@@ -35,7 +35,7 @@ class LinkConfigurer extends React.Component{
 			.then(response=>{this.props.updateStoreData(updates);return response.json()})
 			.then(response=>{
 				console.log(response);
-				console.log(this.props.user)
+				console.log(this.props.user);
 				if(response.exists == true){
 					// alert("Enter vera name")
 					var bodyStr = JSON.stringify(this.props.user.userdata)
@@ -66,7 +66,7 @@ class LinkConfigurer extends React.Component{
 	}
 	_grabUserInputs(){
 		return {
-			"resumeid" : this.refs.resumeid.value
+			"resumeid" : this.refs.resumeid.value,
 		}
 	}
 	render(){
