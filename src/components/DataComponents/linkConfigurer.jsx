@@ -32,20 +32,22 @@ class LinkConfigurer extends React.Component{
 				// mode: "no-cors",
 				headers:{'Access-Control-Request-Headers': "*","Access-Control-Allow-Origin":"*"},
 			})
-			.then(response=>{this.props.updateStoreData(updates);return response.json()})
+			.then(response=>{return response.json()})
 			.then(response=>{
 				console.log(response);
 				console.log(this.props.user);
 				if(response.exists == true){
 					// alert("Enter vera name")
-					var bodyStr = JSON.stringify(this.props.user.userdata)
-					fetch("http://localhost:3000/user/user/put", {
-						//pass cookies, for authentication
-						method: 'POST',
-						body:bodyStr,
-						// mode: "no-cors",
-						headers:{'Access-Control-Request-Headers': "*","Access-Control-Allow-Origin":"*","Content-Type":"application/json"}
-					}).then(response=>{resolve()})
+					if(_.get(this.props,'user.userdata.returningUser',false)){
+						console.log(this.state.resumeidChanged + "  "+_.get(this.props,'user.userdata.resumeid',""))
+						if(this.refs.resumeid.value == _.get(this.props,'user.userdata.resumeid',"") ){
+							this.props.updateStoreData(updates);
+							resolve()
+						}
+					}else{
+					reject()
+					alert("already presents")
+				}
 				}
 				else{
 					var bodyStr = JSON.stringify(this.props.user.userdata)
@@ -56,25 +58,27 @@ class LinkConfigurer extends React.Component{
 						// mode: "no-cors",
 						headers:{'Access-Control-Request-Headers': "*","Access-Control-Allow-Origin":"*","Content-Type":"application/json"}
 					}).then(response=>{resolve()})
-
+					this.props.updateStoreData(updates)
 				}
 			})
 		});
-		this.props.updateStoreData(updates)
-
-		return true;
 	}
 	_grabUserInputs(){
 		return {
-			"resumeid" : this.refs.resumeid.value,
+			"resumeid" : this.refs.resumeid.value
 		}
 	}
+ componentDidMount(){
+	 this.setState({resumeidChanged:_.get(this.props,'user.userdata.resumeid',"")})
+ }
+
+
 	render(){
 		return(
 			<div className="">
 				<form className="form-horizontal">
 					<div className="form-group">
-						<label className="control-label col-sm-2" for="fname">Resume Id :  </label><div className="col-sm-4"><input ref="resumeid" id="resumeid" className="form-control" placeholder="Name" type="text" defaultValue={_.get(this.props,'user.userdata.resumeid',"")} /></div>
+						<label className="control-label col-sm-2" for="fname">Resume Id :  </label><div className="col-sm-4"><input ref="resumeid" id="resumeid" className="form-control" placeholder="Name" type="text"  defaultValue={_.get(this.props,'user.userdata.resumeid',"")} onChange={(e)=>this.handleTextChange("resumeidChanged",e)}/></div>
 					</div>
 				</form>
 			</div>
