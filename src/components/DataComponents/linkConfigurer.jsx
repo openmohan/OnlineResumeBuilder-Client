@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux';
 var _ = require('lodash');
 import fetch from 'isomorphic-fetch'
+import {RESUMESITE} from '../../../actions/actionTypes'
 
 // import {updateStoreData} from '../../../actions/actions'
 
@@ -14,9 +15,11 @@ class LinkConfigurer extends React.Component{
 	}
 	handleTextChange(name,e){
 		this.setState({[name] : e.target.value})
+		this.setState({exists:false})
 		// console.log(this.state)
 	}
 	isValidated(){
+		console.log(this.props.user.userdata)
 		var updates = this._grabUserInputs();
 		// if()
 		var bodyStr = ""
@@ -35,6 +38,7 @@ class LinkConfigurer extends React.Component{
 			.then(response=>{return response.json()})
 			.then(response=>{
 				console.log(response);
+				this.setState(response);
 				console.log(this.props.user);
 				if(response.exists == true){
 					// alert("Enter vera name")
@@ -42,14 +46,23 @@ class LinkConfigurer extends React.Component{
 						console.log(this.state.resumeidChanged + "  "+_.get(this.props,'user.userdata.resumeid',""))
 						if(this.refs.resumeid.value == _.get(this.props,'user.userdata.resumeid',"") ){
 							this.props.updateStoreData(updates);
+							var bodyStr = JSON.stringify(this.props.user.userdata)
+							fetch("http://localhost:3000/user/user/put", {
+								//pass cookies, for authentication
+								method: 'POST',
+								body:bodyStr,
+								// mode: "no-cors",
+								headers:{'Access-Control-Request-Headers': "*","Access-Control-Allow-Origin":"*","Content-Type":"application/json"}
+							}).then(response=>{resolve()})
 							resolve()
 						}
 					}else{
+
 					reject()
-					alert("already presents")
 				}
 				}
 				else{
+					this.props.updateStoreData(updates);
 					var bodyStr = JSON.stringify(this.props.user.userdata)
 					fetch("http://localhost:3000/user/user/put", {
 						//pass cookies, for authentication
@@ -65,20 +78,26 @@ class LinkConfigurer extends React.Component{
 	}
 	_grabUserInputs(){
 		return {
-			"resumeid" : this.refs.resumeid.value
+			"resumeid" : this.state.resumeidChanged
 		}
 	}
- componentDidMount(){
-	 this.setState({resumeidChanged:_.get(this.props,'user.userdata.resumeid',"")})
+ componentWillMount(){
+	 this.setState({resumeidChanged:_.get(this.props,'user.userdata.resumeid',""),exists:false})
  }
 
 
 	render(){
+		var extraClass = this.state.exists?"has-error":""
 		return(
 			<div className="">
 				<form className="form-horizontal">
+					<div className={"form-group "+extraClass}>
+							<label className="control-label col-sm-2 " for="fname">Resume Id :  </label><div className="col-sm-10 controls"><input ref="resumeid" id="resumeid" className="form-control" placeholder="Name" type="text"  defaultValue={_.get(this.props,'user.userdata.resumeid',"")} onChange={(e)=>this.handleTextChange("resumeidChanged",e)}/>
+							{this.state.exists?<span className="help-inline label label-danger" >Username is taken</span>:""}
+						</div>
+				</div>
 					<div className="form-group">
-						<label className="control-label col-sm-2" for="fname">Resume Id :  </label><div className="col-sm-4"><input ref="resumeid" id="resumeid" className="form-control" placeholder="Name" type="text"  defaultValue={_.get(this.props,'user.userdata.resumeid',"")} onChange={(e)=>this.handleTextChange("resumeidChanged",e)}/></div>
+						<label className="control-label col-sm-7" >Resume site is  : {RESUMESITE}{this.state.resumeidChanged} </label>
 					</div>
 				</form>
 			</div>

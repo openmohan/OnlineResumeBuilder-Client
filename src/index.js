@@ -8,8 +8,17 @@ import { Router, Route, Link, browserHistory, IndexRoute,DefaultRoute,Redirect,I
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import {Provider } from 'react-redux'
 import configureStore from '../configureStore'
+var _ = require('lodash');
 
 let store = configureStore();
+
+function requireAuth(){
+	if(_.get(IN.User,"isAuthorized",function(){})()){
+
+	}else{
+		browserHistory.push("/");
+	}
+}
 
 ReactDOM.render(
 	<Provider store={store} >
@@ -17,7 +26,7 @@ ReactDOM.render(
 	<Route path = "/" component = {App}>
     <IndexRoute component={Home}/>
       <Route path="/mohan" component={Home}/>
-			<Route path="/EditUser" component={EditUser}/>
+			<Route path="/EditUser" component={EditUser} onEnter={requireAuth}/>
 	  	<Route path="*" component={NotFound}/>
 	</Route>
 	</Router>

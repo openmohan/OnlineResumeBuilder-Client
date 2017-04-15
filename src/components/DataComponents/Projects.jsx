@@ -5,28 +5,24 @@ import styles from './css/switch.css'
 import DragHandle from './DragHandle.jsx'
 
 
-/* Work component - Single */
-const SortableItem = SortableElement(function({project,alertme,updateWorkComponents,id}){
-  console.log(id)
+/* Project component - Single */
+const SortableItem = SortableElement(function({project,alertme,updateProjectComponents,id}){
   return(
 
-    <SingleWorkComponent project={project} alertme={alertme} updateWorkComponents={updateWorkComponents} index={id} ></SingleWorkComponent>
+    <SingleProjectComponent project={project} alertme={alertme} updateProjectComponents={updateProjectComponents} index={id} ></SingleProjectComponent>
 
   )
 });
 
-var SingleWorkComponent = React.createClass({
-  updateWorkComponent : function(event,index){
+var SingleProjectComponent = React.createClass({
+  updateProjectComponent : function(event,index){
 
-    this.props.updateWorkComponents(event,index);
+    this.props.updateProjectComponents(event,index);
 
   },
   render: function(){
-    console.log("-----From single------")
-    console.log(this.props)
-    console.log("-----From single------")
     return(
-      <div className="well well-lg" onChange={(event)=>this.updateWorkComponent(event,this.props.index)} >
+      <div className="well well-lg" onChange={(event)=>this.updateProjectComponent(event,this.props.index)} >
         <DragHandle />
 
         <div className="form-horizontal form-group">
@@ -53,11 +49,11 @@ var SingleWorkComponent = React.createClass({
 })
 
 
-const SortableList = SortableContainer(function({project,alertme,updateWorkComponents}){
+const SortableList = SortableContainer(function({project,alertme,updateProjectComponents}){
   return (
     <ul>
       {project.map((value, index) => (
-        <SortableItem alertme={alertme} key={`project-${index}`} updateWorkComponents={updateWorkComponents} index={index}  id={index} project={value} ></SortableItem>
+        <SortableItem alertme={alertme} key={`project-${index}`} updateProjectComponents={updateProjectComponents} index={index}  id={index} project={value} ></SortableItem>
       ))}
     </ul>
   );
@@ -79,23 +75,23 @@ class SortableComponent extends Component {
     // alert("clicked me")
   }
   render() {
-    console.log("mohan")
-    console.log(this.props.project)
 
-    return <SortableList project={this.props.project} updateWorkComponents={this.props.updateWorkComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)} pressDelay="200"  useDragHandle={true} axis="y" lockAxis="y" />;
+
+    return <SortableList project={this.props.project} updateProjectComponents={this.props.updateProjectComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)} pressDelay={200}  useDragHandle={true} axis="y" lockAxis="y" />;
   }
 }
 
 export default class DraggableComponent extends Component{
   constructor(props){
     super(props);
-    //  this.updateWorkComponents=this.updateWorkComponents.bind(this)
+    //  this.updateProjectComponents=this.updateProjectComponents.bind(this)
     this.isValidated =  this.isValidated.bind(this)
   }
   componentWillUnmount() {
     var updates = this._grabUserInputs();
     // if()
     this.props.updateStoreData(updates)
+    console.log(updates)
     return true;
   }
   componentWillReceiveProps(nextProps) {
@@ -121,7 +117,7 @@ export default class DraggableComponent extends Component{
   handleTextChange(name,e){
     this.setState({[name] : e.target.value})
   }
-  updateWorkComponents(event,index){
+  updateProjectComponents(event,index){
     let project = this.state.project;
 
     var updates = {
@@ -136,12 +132,12 @@ export default class DraggableComponent extends Component{
     project[index] = updates;
     this.setState({"project" : project})
   }
-  addNewWork(){
+  addNewProject(){
     var project = this.state.project;
     project.push({"projectname":"","from":"","to":"","company":"","isopensource":false,"description":"","keyskills":""});
     this.setState({project : project})
   }
-  captureWorkDetails(e){
+  captureProjectDetails(e){
   }
   updateState(obj){
     this.setState(obj);
@@ -154,21 +150,19 @@ export default class DraggableComponent extends Component{
   }
   onSortEnd({oldIndex, newIndex}){
 
-    console.log(this.state)
     this.setState({
       project: arrayMove(this.state.project, oldIndex, newIndex),
     });
   };
   render(){
     var project = this.state.project
-    console.log(project)
     return(
-      <div ref="WorkComponentMaster" className="" >
+      <div ref="ProjectComponentMaster" className="" >
         <form className="form-horizontal">
           <div className="form-horizontal form-group">
-            <input type="button"  className="btn btn-success" onClick={this.addNewWork.bind(this)} value="add new" />
+            <input type="button"  className="btn btn-success" onClick={this.addNewProject.bind(this)} value="add new" />
           </div>
-          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} updateWorkComponents={this.updateWorkComponents.bind(this)} project={project} > </SortableComponent>
+          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} updateProjectComponents={this.updateProjectComponents.bind(this)} project={project} > </SortableComponent>
         </form>
       </div>
 
