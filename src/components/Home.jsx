@@ -27,7 +27,7 @@ var Home = React.createClass({
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                 </button>
-                <a className="navbar-brand" href="#">Start Bootstrap</a>
+                <a className="navbar-brand" href="#">Resume-d</a>
             </div>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
@@ -50,6 +50,8 @@ var Home = React.createClass({
             <div className="container">
                 <h1>Create resume</h1>
                 <h2>Maintain it easily</h2>
+                  <img className={styles.LinkedInButton} src="/assets/img/SignIn.png" onClick={this.signIn} onMouseOver={this.changeActiveImage} onMouseLeave={this.changeActiveImage}></img>
+
             </div>
         </div>
     </header>
@@ -59,17 +61,17 @@ var Home = React.createClass({
         <hr className="featurette-divider"></hr>
 
         <div className="featurette" id="about">
-            <img className="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500"/>
-            <h2 className="featurette-heading">This First Heading
-                <span className="text-muted">Will Catch Your Eye</span>
+            <img className="featurette-image img-circle img-responsive pull-right img400" src="/assets/img/flyingkid.jpg"/>
+            <h2 className="featurette-heading">Create Online resume
+                <span className="text-muted"><br></br>Show the power of yours!!!</span>
             </h2>
-            <p className="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p className="lead">Create your online resume instantly and use it over applying job . Easier to edit and a lot more of templates are coming in shortly</p>
         </div>
 
         <hr className="featurette-divider"></hr>
 
         <div className="featurette" id="services">
-            <img className="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/500x500"/>
+            <img className="featurette-image img-circle img-responsive pull-left img400" style={{"width":"400px !important"}} src="http://placehold.it/500x500"/>
             <h2 className="featurette-heading">The Second Heading
                 <span className="text-muted">Is Pretty Cool Too.</span>
             </h2>
@@ -79,11 +81,11 @@ var Home = React.createClass({
         <hr className="featurette-divider"></hr>
 
         <div className="featurette" id="contact">
-            <img className="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500"/>
-            <h2 className="featurette-heading">The Third Heading
-                <span className="text-muted">Will Seal the Deal.</span>
+            <img className="featurette-image img-circle img-responsive pull-right img400"  src="/assets/img/mohan.jpg"/>
+            <h2 className="featurette-heading">A automation enthusiast
+                <span className="text-muted"><br/>A lonely developer</span>
             </h2>
-            <p className="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p className="lead">I am Mohan Prasath . Developed this for fun . I hope this should really help you , if you have no interest in creating a site on your own</p>
         </div>
 
         <hr className="featurette-divider"></hr>
@@ -97,7 +99,6 @@ var Home = React.createClass({
         </footer>
 
 
-      <img className={styles.LinkedInButton} src="/assets/img/SignIn.png" onClick={this.signIn} onMouseOver={this.changeActiveImage} onMouseLeave={this.changeActiveImage}></img>
       </div>
     </div>
   )}

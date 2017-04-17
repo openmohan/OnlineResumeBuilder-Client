@@ -161,6 +161,7 @@ body {
 
 .featurette-image.pull-left {
     margin-right: 40px;
+
 }
 
 .featurette-image.pull-right {
@@ -291,4 +292,8 @@ footer {
         margin-bottom: 10px;
         margin-left: 0;
     }
+}
+.img400{
+  height:400px !important;
+  width:400px !important;
 }
