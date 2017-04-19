@@ -5,11 +5,11 @@ import DragHandle from './DragHandle.jsx'
 
 
 /* Education component - Single */
-const SortableItem = SortableElement(function({education,alertme,updateEducationComponents,id}){
+const SortableItem = SortableElement(function({education,alertme,updateEducationComponents,id,deleteEducationComponent}){
   console.log(id)
   return(
 
-    <SingleEducationComponent education={education} alertme={alertme} updateEducationComponents={updateEducationComponents} index={id} ></SingleEducationComponent>
+    <SingleEducationComponent education={education} alertme={alertme} deleteEducationComponent={deleteEducationComponent} updateEducationComponents={updateEducationComponents} index={id} ></SingleEducationComponent>
 
   )
 });
@@ -20,6 +20,9 @@ var SingleEducationComponent = React.createClass({
     this.props.updateEducationComponents(event,index);
 
   },
+  deleteEducationComponent : function(event,index){
+    this.props.deleteEducationComponent(event,index);
+  },
   render: function(){
     console.log("-----From single------")
     console.log(this.props)
@@ -27,19 +30,19 @@ var SingleEducationComponent = React.createClass({
     return(
       <div className="well well-lg" onChange={(event)=>this.updateEducationComponent(event,this.props.index)} >
         <DragHandle />
-
+        <input type="button" onClick={(event)=>this.deleteEducationComponent(event,this.props.index)} value="ss" />
         <div className="form-group">
-          <label className="control-label col-sm-2" for="institute"> Institute Name :  </label><div className="col-sm-10"><input id="institute" className="form-control" placeholder="Institute Name" type="text"  value={_.get(this.props,'education.school',"")}  /></div>
+          <label className="control-label col-sm-2" for="institute"> Institute Name :  </label><div className="col-sm-10"><input id="institute" className="form-control" placeholder="Princeton University" type="text"  value={_.get(this.props,'education.school',"")}  /></div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-2" for="degree"> Degree :  </label><div className="col-sm-10"><input id="degree" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'education.degree',"")} /></div>
+          <label className="control-label col-sm-2" for="degree"> Degree :  </label><div className="col-sm-10"><input id="degree" className="form-control" type="email" placeholder="Computer Science" type="text" value={_.get(this.props,'education.degree',"")} /></div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-2" for={"start-date"}> Start date :  </label><div className="col-sm-4"><input id={"start-date"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'education.start-date',"")} /></div>
-          <label className="control-label col-sm-2" for={"end-date"}> End date :  </label><div className="col-sm-4"><input id={"end-date"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'education.end-date',"")} /></div>
+          <label className="control-label col-sm-2" for={"start-date"}> Start date :  </label><div className="col-sm-4"><input id={"start-date"} className="form-control" type="text" placeholder="(DD/MM/YYYY)" value={_.get(this.props,'education.start-date',"")} /></div>
+          <label className="control-label col-sm-2" for={"end-date"}> End date :  </label><div className="col-sm-4"><input id={"end-date"} className="form-control" type="text" placeholder="(DD/MM/YYYY)" value={_.get(this.props,'education.end-date',"")} /></div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-2" for="percentage"> percentage :  </label><div className="col-sm-4"><input id="percentage" className="form-control" type="email" placeholder="Percentage % " type="text" value={_.get(this.props,'education.percentage',"")} /></div>
+          <label className="control-label col-sm-2" for="percentage"> percentage :  </label><div className="col-sm-4"><input id="percentage" className="form-control" type="email" placeholder="% " type="text" value={_.get(this.props,'education.percentage',"")} /></div>
         </div>
       </div>
     )
@@ -47,11 +50,11 @@ var SingleEducationComponent = React.createClass({
 })
 
 
-const SortableList = SortableContainer(function({education,alertme,updateEducationComponents}){
+const SortableList = SortableContainer(function({education,alertme,updateEducationComponents,deleteEducationComponent}){
   return (
     <ul>
       {education.map((value, index) => (
-        <SortableItem alertme={alertme} key={`education-${index}`} updateEducationComponents={updateEducationComponents} index={index}  id={index} education={value} ></SortableItem>
+        <SortableItem alertme={alertme} key={`education-${index}`} deleteEducationComponent={deleteEducationComponent} updateEducationComponents={updateEducationComponents} index={index}  id={index} education={value} ></SortableItem>
       ))}
     </ul>
   );
@@ -74,7 +77,7 @@ class SortableComponent extends Component {
   }
   render() {
 
-    return <SortableList education={this.props.education} updateEducationComponents={this.props.updateEducationComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)}  useDragHandle={true} axis="y" lockAxis="y" />;
+    return <SortableList education={this.props.education} deleteEducationComponent={this.props.deleteEducationComponent} updateEducationComponents={this.props.updateEducationComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)}  useDragHandle={true} axis="y" lockAxis="y" />;
   }
 }
 
@@ -126,6 +129,13 @@ export default class DraggableComponent extends Component{
     education[index] = updates;
     this.setState({"education" : education})
   }
+
+  deleteEducationComponent(event,index){
+    let education = this.state.education;
+    education.splice(index,1);
+    this.setState({"education":education})
+  }
+
   addNewEducation(){
     var education = this.state.education;
     education.push({"school":"","start-date":"","end-date":"","degree":"","percentage":""});
@@ -156,7 +166,7 @@ export default class DraggableComponent extends Component{
           <div className="form-horizontal form-group">
             <input type="button"  className="btn btn-success" onClick={this.addNewEducation.bind(this)} value="add new" />
           </div>
-          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} updateEducationComponents={this.updateEducationComponents.bind(this)} education={education} > </SortableComponent>
+          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} deleteEducationComponent={this.deleteEducationComponent.bind(this)} updateEducationComponents={this.updateEducationComponents.bind(this)} education={education} > </SortableComponent>
         </form>
       </div>
 

@@ -11,8 +11,9 @@ class Bio extends React.Component{
 		this.isValidated =  this.isValidated.bind(this)
 	}
 	handleTextChange(name,e){
-		this.setState({[name] : e.target.value})
+		// this.setState({[name] : e.target.value})
 		// console.log(this.state)
+		this.props.updateStoreData({[name] : e.target.value})
 	}
 	isValidated(){
 		var updates = this._grabUserInputs();
@@ -37,14 +38,14 @@ class Bio extends React.Component{
 		<div className="">
 		<form className="form-horizontal">
 			<div className="form-group">
-        <label className="control-label col-sm-2" for="fname">First Name :  </label><div className="col-sm-4"><input ref="firstName" id="fname" className="form-control" placeholder="Name" type="text" value={_.get(this.props,'user.userdata.firstName',"")} /></div>
-        <label className="control-label col-sm-2" for="lname">Last Name :  </label><div className="col-sm-4"><input ref="lastName" id="lname" className="form-control" placeholder="Name" type="text" value={_.get(this.props,'user.userdata.lastName',"")} /></div>
+        <label className="control-label col-sm-2" for="fname">First Name :  </label><div className="col-sm-4"><input ref="firstName" id="fname" className="form-control" placeholder="Name" type="text" value={_.get(this.props,'user.userdata.firstName',"")} onChange={(e)=>this.handleTextChange("firstName",e)} /></div>
+        <label className="control-label col-sm-2" for="lname">Last Name :  </label><div className="col-sm-4"><input ref="lastName" id="lname" className="form-control" placeholder="Name" type="text" value={_.get(this.props,'user.userdata.lastName',"")} onChange={(e)=>this.handleTextChange("lastName",e)} /></div>
       </div>
 			<div className="form-group">
-        <label className="control-label col-sm-2" for="email"> E-Mail :  </label><div className="col-sm-10"><input id="email" ref="emailaddress" className="form-control" type="email" placeholder="E-Mail" type="text" value={_.get(this.props,'user.userdata.emailaddress',"")} onChange={(e)=>this.handleTextChange("email",e)}/></div>
+        <label className="control-label col-sm-2" for="email"> E-Mail :  </label><div className="col-sm-10"><input id="email" ref="emailaddress" className="form-control" type="email" placeholder="E-Mail" type="text" value={_.get(this.props,'user.userdata.emailaddress',"")} onChange={(e)=>this.handleTextChange("emailaddress",e)}/></div>
       </div>
 			<div className="form-group">
-        <label className="control-label col-sm-2" for="phone"> Phone Number :  </label><div className="col-sm-10"><input id="phone" ref="phonenumber" className="form-control" type="" placeholder="Phone Number" type="number" value={_.get(this.props,'user.userdata.phonenumber',"")} onChange={(e)=>this.handleTextChange("phone",e)}/></div>
+        <label className="control-label col-sm-2" for="phone"> Phone Number :  </label><div className="col-sm-10"><input id="phone" ref="phonenumber" className="form-control" type="" placeholder="Phone Number" type="number" value={_.get(this.props,'user.userdata.phonenumber',"")} onChange={(e)=>this.handleTextChange("phonenumber",e)}/></div>
       </div>
 			<div className="form-group">
 				<label className="control-label col-sm-2" for="headline"> headline :  </label><div className="col-sm-10"><input id="headline" ref="headline" className="form-control" placeholder="Headline" type="text" value={_.get(this.props,'user.userdata.headline',"")} onChange={(e)=>this.handleTextChange("headline",e)}/></div>
@@ -53,7 +54,7 @@ class Bio extends React.Component{
 				<label className="control-label col-sm-2" for="industry"> Industry :  </label><div className="col-sm-10"><input id="industry" ref="industry" className="form-control" type="email" placeholder="Industry" type="text" value={_.get(this.props,'user.userdata.industry',"")} onChange={(e)=>this.handleTextChange("industry",e)}/></div>
 			</div>
 			<div className="form-group">
-				<label className="control-label col-sm-2" for="title"> Title :  </label><div className="col-sm-10"><input id="title" ref="title" className="form-control" type="email" placeholder="Industry" type="text" value={_.get(this.props,'user.userdata.industry',"")} onChange={(e)=>this.handleTextChange("industry",e)}/></div>
+				<label className="control-label col-sm-2" for="title"> Title :  </label><div className="col-sm-10"><input id="title" ref="title" className="form-control" type="email" placeholder="Title" type="text" value={_.get(this.props,'user.userdata.title',"")} onChange={(e)=>this.handleTextChange("title",e)}/></div>
 			</div>
 			<div className="form-group">
 				<label className="control-label col-sm-2" for="summary"> Summary :  </label><div className="col-sm-10"><textarea id="summary" ref="summary" className="form-control" type="textarea" placeholder="Summary" type="textarea" value={_.get(this.props,'user.userdata.summary',"")} onChange={(e)=>this.handleTextChange("summary",e)}/></div>

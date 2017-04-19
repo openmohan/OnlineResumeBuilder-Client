@@ -29,11 +29,11 @@ var SingleWorkComponent = React.createClass({
       <tr onChange={(event)=>this.updateWorkComponent(event,this.props.index)} className="tr" >
         <td className={styles.tdData}>
           <DragHandle />
-          <input type="text" id="skillname" value={_.get(this.props,'skills.skillname',"")} placeholder="Java" />
+          <input type="text" id="skillname" value={_.get(this.props,'skills.skillname',"")} placeholder="eg: Java" />
 
     </td>
-    <td className={styles.tdData}><input type="text" id="experience" value={_.get(this.props,'skills.experience',"")} placeholder="1.5"/> </td>
-    <td className={styles.tdData}><input type="text" id="rating" value={_.get(this.props,'skills.rating',"")} placeholder="7.5"/> </td>
+    <td className={styles.tdData}><input type="text" id="experience" value={_.get(this.props,'skills.experience',"")} placeholder="eg: 1.5"/> </td>
+    <td className={styles.tdData}><input type="text" id="rating" value={_.get(this.props,'skills.rating',"")} placeholder="eg: 7.5"/> </td>
     </tr>
 		)
 	}

@@ -61,9 +61,9 @@ var Home = React.createClass({
         <hr className="featurette-divider"></hr>
 
         <div className="featurette" id="about">
-            <img className="featurette-image img-circle img-responsive pull-right img400" src="/assets/img/flyingkid.jpg"/>
+            <img className="featurette-image img-circle img-responsive pull-right img400" src="/assets/img/superhero.jpg"/>
             <h2 className="featurette-heading">Create Online resume
-                <span className="text-muted"><br></br>Show the power of yours!!!</span>
+                <span className="text-muted"><br></br>Show the power of yours!!! </span>
             </h2>
             <p className="lead">Create your online resume instantly and use it over applying job . Easier to edit and a lot more of templates are coming in shortly</p>
         </div>
@@ -71,11 +71,11 @@ var Home = React.createClass({
         <hr className="featurette-divider"></hr>
 
         <div className="featurette" id="services">
-            <img className="featurette-image img-circle img-responsive pull-left img400" style={{"width":"400px !important"}} src="http://placehold.it/500x500"/>
-            <h2 className="featurette-heading">The Second Heading
-                <span className="text-muted">Is Pretty Cool Too.</span>
+            <img className="featurette-image  img-responsive pull-left img400" style={{"width":"400px !important"}} src="/assets/img/superherodress.jpg"/>
+            <h2 className="featurette-heading">Templates coming in !!!
+                <span className="text-muted"><br/>Impressive Ones</span>
             </h2>
-            <p className="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p className="lead">The premium users can select their templates and can even create any number of resumes</p>
         </div>
 
         <hr className="featurette-divider"></hr>
@@ -93,7 +93,7 @@ var Home = React.createClass({
         <footer>
             <div className="row">
                 <div className="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; coldvalcano</p>
                 </div>
             </div>
         </footer>

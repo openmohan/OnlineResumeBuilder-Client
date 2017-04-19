@@ -129,7 +129,7 @@ body {
     display: block;
     width: 100%;
     text-align: center;
-    background: url('http://localhost:8080/assets/img/landingpage.jpg') no-repeat center center scroll;
+    background: url('http://192.168.10.216:8080/assets/img/landingpage.jpg') no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
