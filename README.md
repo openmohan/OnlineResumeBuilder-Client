@@ -1,6 +1,13 @@
 # OnlineResumeBuilder-Client
 A React js client for Online Resume builder
 
+Sign in with linkedin and create resume 
+https://realevents.herokuapp.com/
+
+Sample resume - http://mytale.herokuapp.com/batman
+
+http://mytale.herokuapp.com/mohanprasaths
+
 <img src="https://user-images.githubusercontent.com/12637959/27423064-04872ade-574e-11e7-8b43-36b0d1ce7e34.gif" />
 
 # Home
