@@ -6,10 +6,10 @@ import DragHandle from './DragHandle.jsx'
 
 
 /* Project component - Single */
-const SortableItem = SortableElement(function({project,alertme,updateProjectComponents,id}){
+const SortableItem = SortableElement(function({project,alertme,updateProjectComponents,id,deleteProjectComponent}){
   return(
 
-    <SingleProjectComponent project={project} alertme={alertme} updateProjectComponents={updateProjectComponents} index={id} ></SingleProjectComponent>
+    <SingleProjectComponent project={project} alertme={alertme} deleteProjectComponent={deleteProjectComponent} updateProjectComponents={updateProjectComponents} index={id} ></SingleProjectComponent>
 
   )
 });
@@ -20,10 +20,16 @@ var SingleProjectComponent = React.createClass({
     this.props.updateProjectComponents(event,index);
 
   },
+  deleteProjectComponent : function(event,index){
+    this.props.deleteProjectComponent(event,index);
+  },
   render: function(){
     return(
       <div className="well well-lg" onChange={(event)=>this.updateProjectComponent(event,this.props.index)} >
+        <div className="row closeButton">
         <DragHandle />
+        <img src="/assets/img/delete.png" className="pull-right closeButtonImg" onClick={(event)=>this.deleteProjectComponent(event,this.props.index)} value="X" />
+        </div>
 
         <div className="form-horizontal form-group">
           <label className="control-label col-sm-2" for="projectname">  Project Name :  </label><div className="col-sm-10"><input id="projectname" className="form-control" placeholder="eg: Software Developer" type="text"  value={_.get(this.props,'project.projectname',"")}  /></div>
@@ -34,8 +40,8 @@ var SingleProjectComponent = React.createClass({
 
       </div>
         <div className="form-horizontal form-group">
-          <label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'project.from',"")} /></div>
-          <label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'project.to',"")} /></div>
+          <label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="date" placeholder="Start Date (YYYY-MM-DD)" value={_.get(this.props,'project.from',"")} /></div>
+          <label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="date" placeholder="End Date (YYYY-MM-DD)" value={_.get(this.props,'project.to',"")} /></div>
         </div>
         <div className="form-horizontal form-group">
           <label className="control-label col-sm-2" for="description"> Description :  </label><div className="col-sm-10"><textarea id="description" className="form-control" type="textarea" placeholder="I developed XXX and YYY " type="text" value={_.get(this.props,'project.description',"")} /></div>
@@ -49,11 +55,11 @@ var SingleProjectComponent = React.createClass({
 })
 
 
-const SortableList = SortableContainer(function({project,alertme,updateProjectComponents}){
+const SortableList = SortableContainer(function({project,alertme,updateProjectComponents,deleteProjectComponent}){
   return (
     <ul>
       {project.map((value, index) => (
-        <SortableItem alertme={alertme} key={`project-${index}`} updateProjectComponents={updateProjectComponents} index={index}  id={index} project={value} ></SortableItem>
+        <SortableItem alertme={alertme} key={`project-${index}`} deleteProjectComponent={deleteProjectComponent} updateProjectComponents={updateProjectComponents} index={index}  id={index} project={value} ></SortableItem>
       ))}
     </ul>
   );
@@ -77,7 +83,7 @@ class SortableComponent extends Component {
   render() {
 
 
-    return <SortableList project={this.props.project} updateProjectComponents={this.props.updateProjectComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)} pressDelay={200}  useDragHandle={true} axis="y" lockAxis="y" />;
+    return <SortableList project={this.props.project} deleteProjectComponent={this.props.deleteProjectComponent} updateProjectComponents={this.props.updateProjectComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)}  useDragHandle={true} axis="y" lockAxis="y" />;
   }
 }
 
@@ -91,7 +97,6 @@ export default class DraggableComponent extends Component{
     var updates = this._grabUserInputs();
     // if()
     this.props.updateStoreData(updates)
-    console.log(updates)
     return true;
   }
   componentWillReceiveProps(nextProps) {
@@ -100,8 +105,21 @@ export default class DraggableComponent extends Component{
   isValidated(){
     var updates = this._grabUserInputs();
     // if()
-    this.props.updateStoreData(updates)
-    return true;
+    var flag = true
+    updates.project.forEach(function(a){
+      _.forOwn(a, function(value, key) {
+        if(typeof (a[key]) != "boolean" && ( a[key] == "" || a[key] == undefined)){
+          flag = false
+        }
+        console.log(value)
+      });
+    })
+    if(!flag){
+      alert("Fields cannot be left empty")
+    }else{
+      this.props.updateStoreData(updates)
+    }
+    return flag;
   }
   _grabUserInputs(){
     return {
@@ -131,6 +149,11 @@ export default class DraggableComponent extends Component{
     }
     project[index] = updates;
     this.setState({"project" : project})
+  }
+  deleteProjectComponent(event,index){
+    let project = this.state.project;
+    project.splice(index,1);
+    this.setState({"project":project})
   }
   addNewProject(){
     var project = this.state.project;
@@ -162,7 +185,7 @@ export default class DraggableComponent extends Component{
           <div className="form-horizontal form-group">
             <input type="button"  className="btn btn-success" onClick={this.addNewProject.bind(this)} value="add new" />
           </div>
-          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} updateProjectComponents={this.updateProjectComponents.bind(this)} project={project} > </SortableComponent>
+          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} deleteProjectComponent={this.deleteProjectComponent.bind(this)} updateProjectComponents={this.updateProjectComponents.bind(this)} project={project} > </SortableComponent>
         </form>
       </div>
 

@@ -6,11 +6,10 @@ import DragHandle from './DragHandle.jsx'
 
 
 /* Work component - Single */
-const SortableItem = SortableElement(function({work,alertme,updateWorkComponents,id}){
-  console.log(id)
+const SortableItem = SortableElement(function({work,alertme,updateWorkComponents,id,deleteWorkComponent}){
   return(
 
-    <SingleWorkComponent work={work} alertme={alertme} updateWorkComponents={updateWorkComponents} index={id} ></SingleWorkComponent>
+    <SingleWorkComponent work={work} alertme={alertme} deleteWorkComponent={deleteWorkComponent} updateWorkComponents={updateWorkComponents} index={id} ></SingleWorkComponent>
 
   )
 });
@@ -21,13 +20,16 @@ var SingleWorkComponent = React.createClass({
     this.props.updateWorkComponents(event,index);
 
   },
+  deleteWorkComponent : function(event,index){
+    this.props.deleteWorkComponent(event,index);
+  },
   render: function(){
-    console.log("-----From single------")
-    console.log(this.props)
-    console.log("-----From single------")
     return(
       <div className="well well-lg" onChange={(event)=>this.updateWorkComponent(event,this.props.index)} >
+        <div className="row closeButton">
         <DragHandle />
+        <img src="/assets/img/delete.png" className="pull-right closeButtonImg" onClick={(event)=>this.deleteWorkComponent(event,this.props.index)} value="X" />
+        </div>
 
         <div className="form-horizontal form-group">
           <label className="control-label col-sm-2" for="title">  Title :  </label><div className="col-sm-10"><input id="title" className="form-control" placeholder="eg: Software Developer" type="text"  value={_.get(this.props,'work.title',"")}  /></div>
@@ -40,8 +42,8 @@ var SingleWorkComponent = React.createClass({
           <label className="control-label col-sm-2" for="currentCompany">  Is current company :  </label><div className="col-sm-10"><label className={styles.switch}> <input type="checkbox" defaultChecked={_.get(this.props,'work.iscurrent',"false")} id="iscurrent"/> <div className={styles.slider +' '+styles.round}></div></label></div>
         </div>
         <div className="form-horizontal form-group">
-          <label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'work.from',"")} /></div>
-          <label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'work.to',"")} /></div>
+          <label className="control-label col-sm-2" for={"from"}> From :  </label><div className="col-sm-4"><input id={"from"} className="form-control" type="date" placeholder="Start Date (YYYY-MM-DD)" value={_.get(this.props,'work.from',"")} /></div>
+          <label className="control-label col-sm-2" for={"to"}> To :  </label><div className="col-sm-4"><input id={"to"} className="form-control" type="date" placeholder="End Date (YYYY-MM-DD)" value={_.get(this.props,'work.to',"")} /></div>
         </div>
         <div className="form-horizontal form-group">
           <label className="control-label col-sm-2" for="description"> Description :  </label><div className="col-sm-10"><textarea id="description" className="form-control" type="textarea" placeholder="I developed XXX and YYY " type="text" value={_.get(this.props,'work.description',"")} /></div>
@@ -52,11 +54,11 @@ var SingleWorkComponent = React.createClass({
 })
 
 
-const SortableList = SortableContainer(function({work,alertme,updateWorkComponents}){
+const SortableList = SortableContainer(function({work,alertme,updateWorkComponents,deleteWorkComponent}){
   return (
     <ul>
       {work.map((value, index) => (
-        <SortableItem alertme={alertme} key={`work-${index}`} updateWorkComponents={updateWorkComponents} index={index}  id={index} work={value} ></SortableItem>
+        <SortableItem alertme={alertme} key={`work-${index}`} deleteWorkComponent={deleteWorkComponent} updateWorkComponents={updateWorkComponents} index={index}  id={index} work={value} ></SortableItem>
       ))}
     </ul>
   );
@@ -78,10 +80,9 @@ class SortableComponent extends Component {
     // alert("clicked me")
   }
   render() {
-    console.log("mohan")
-    console.log(this.props.work)
 
-    return <SortableList work={this.props.work} updateWorkComponents={this.props.updateWorkComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)} pressDelay="200"  useDragHandle={true} axis="y" lockAxis="y" />;
+
+    return <SortableList work={this.props.work} deleteWorkComponent={this.props.deleteWorkComponent} updateWorkComponents={this.props.updateWorkComponents} alertme={this.alertme} onSortEnd={this.onSortEnd.bind(this)}   useDragHandle={true} axis="y" lockAxis="y" />;
   }
 }
 
@@ -103,8 +104,21 @@ export default class DraggableComponent extends Component{
   isValidated(){
     var updates = this._grabUserInputs();
     // if()
-    this.props.updateStoreData(updates)
-    return true;
+    var flag = true
+    updates.work.forEach(function(a){
+      _.forOwn(a, function(value, key) {
+        if(typeof (a[key]) != "boolean" && ( a[key] == "" || a[key] == undefined)){
+          flag = false
+        }
+        console.log(value)
+      });
+    })
+    if(!flag){
+      alert("Fields cannot be left empty")
+    }else{
+      this.props.updateStoreData(updates)
+    }
+    return flag;
   }
   _grabUserInputs(){
     return {
@@ -135,6 +149,11 @@ export default class DraggableComponent extends Component{
     work[index] = updates;
     this.setState({"work" : work})
   }
+  deleteWorkComponent(event,index){
+    let work = this.state.work;
+    work.splice(index,1);
+    this.setState({"work":work})
+  }
   addNewWork(){
     var work = this.state.work;
     work.push({"title":"","from":"","to":"","company":"","iscurrent":false,"location":"","description":""});
@@ -153,21 +172,19 @@ export default class DraggableComponent extends Component{
   }
   onSortEnd({oldIndex, newIndex}){
 
-    console.log(this.state)
     this.setState({
       work: arrayMove(this.state.work, oldIndex, newIndex),
     });
   };
   render(){
     var work = this.state.work
-    console.log(work)
     return(
       <div ref="WorkComponentMaster" className="" >
         <form className="form-horizontal">
           <div className="form-horizontal form-group">
             <input type="button"  className="btn btn-success" onClick={this.addNewWork.bind(this)} value="add new" />
           </div>
-          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} updateWorkComponents={this.updateWorkComponents.bind(this)} work={work} > </SortableComponent>
+          <SortableComponent onSortEnd={this.onSortEnd.bind(this)} deleteWorkComponent={this.deleteWorkComponent.bind(this)} updateWorkComponents={this.updateWorkComponents.bind(this)} work={work} > </SortableComponent>
         </form>
       </div>
 

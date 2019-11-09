@@ -14,7 +14,6 @@ class LinkConfigurer extends React.Component{
 	}
 	handleTextChange(name,e){
 		this.setState({[name] : e.target.value})
-		// console.log(this.state)
 	}
 	isValidated(){
 		var updates = this._grabUserInputs();
@@ -28,12 +27,19 @@ class LinkConfigurer extends React.Component{
 		}
 	}
 	render(){
+		var toRender;
+		if(isSaved){
+			toRender = 		<form className="form-horizontal">
+			      Your Account informations have been saved
+						Your Resume is in <a href={RESUMESITE+(_.get(this.props,'user.userdata.resumeid',""))} target="_blank">Here</a>
+					</form>
+		}
+		else{
+			toRender = <div>Please go back to save your details</div>
+		}
 	return(
 		<div className="">
-		<form className="form-horizontal">
-      Your Account informations have been saved
-			Your Resume is in <a href={RESUMESITE+(_.get(this.props,'user.userdata.resumeid',""))} >{RESUMESITE+(_.get(this.props,'user.userdata.resumeid',""))}</a>
-		</form>
+			{toRender}
 	</div>
 		)
 	}

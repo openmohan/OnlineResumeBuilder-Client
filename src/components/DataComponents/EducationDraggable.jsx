@@ -6,7 +6,6 @@ import DragHandle from './DragHandle.jsx'
 
 /* Education component - Single */
 const SortableItem = SortableElement(function({education,alertme,updateEducationComponents,id,deleteEducationComponent}){
-  console.log(id)
   return(
 
     <SingleEducationComponent education={education} alertme={alertme} deleteEducationComponent={deleteEducationComponent} updateEducationComponents={updateEducationComponents} index={id} ></SingleEducationComponent>
@@ -24,13 +23,12 @@ var SingleEducationComponent = React.createClass({
     this.props.deleteEducationComponent(event,index);
   },
   render: function(){
-    console.log("-----From single------")
-    console.log(this.props)
-    console.log("-----From single------")
     return(
       <div className="well well-lg" onChange={(event)=>this.updateEducationComponent(event,this.props.index)} >
+        <div className="row closeButton">
         <DragHandle />
-        <input type="button" onClick={(event)=>this.deleteEducationComponent(event,this.props.index)} value="ss" />
+        <img src="/assets/img/delete.png" className="pull-right closeButtonImg" onClick={(event)=>this.deleteEducationComponent(event,this.props.index)} value="X" />
+        </div>
         <div className="form-group">
           <label className="control-label col-sm-2" for="institute"> Institute Name :  </label><div className="col-sm-10"><input id="institute" className="form-control" placeholder="Princeton University" type="text"  value={_.get(this.props,'education.school',"")}  /></div>
         </div>
@@ -38,8 +36,8 @@ var SingleEducationComponent = React.createClass({
           <label className="control-label col-sm-2" for="degree"> Degree :  </label><div className="col-sm-10"><input id="degree" className="form-control" type="email" placeholder="Computer Science" type="text" value={_.get(this.props,'education.degree',"")} /></div>
         </div>
         <div className="form-group">
-          <label className="control-label col-sm-2" for={"start-date"}> Start date :  </label><div className="col-sm-4"><input id={"start-date"} className="form-control" type="text" placeholder="(DD/MM/YYYY)" value={_.get(this.props,'education.start-date',"")} /></div>
-          <label className="control-label col-sm-2" for={"end-date"}> End date :  </label><div className="col-sm-4"><input id={"end-date"} className="form-control" type="text" placeholder="(DD/MM/YYYY)" value={_.get(this.props,'education.end-date',"")} /></div>
+          <label className="control-label col-sm-2" for={"start-date"}> Start date :  </label><div className="col-sm-4"><input id={"start-date"} className="form-control" type="date" placeholder="(YYYY-MM-DD)" value={_.get(this.props,'education.start-date',"")} /></div>
+          <label className="control-label col-sm-2" for={"end-date"}> End date :  </label><div className="col-sm-4"><input id={"end-date"} className="form-control" type="date" placeholder="(YYYY-MM-DD)" value={_.get(this.props,'education.end-date',"")} /></div>
         </div>
         <div className="form-group">
           <label className="control-label col-sm-2" for="percentage"> percentage :  </label><div className="col-sm-4"><input id="percentage" className="form-control" type="email" placeholder="% " type="text" value={_.get(this.props,'education.percentage',"")} /></div>
@@ -99,8 +97,21 @@ export default class DraggableComponent extends Component{
   isValidated(){
     var updates = this._grabUserInputs();
     // if()
-    this.props.updateStoreData(updates)
-    return true;
+    var flag = true
+    updates.education.forEach(function(a){
+      _.forOwn(a, function(value, key) {
+        if(a[key] == "" || a[key] == undefined){
+          flag = false
+        }
+        console.log(value)
+      });
+    })
+    if(!flag){
+      alert("Fields cannot be left empty")
+    }else{
+      this.props.updateStoreData(updates)
+    }
+    return flag;
   }
   _grabUserInputs(){
     return {

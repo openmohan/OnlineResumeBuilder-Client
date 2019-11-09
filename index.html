@@ -1,20 +1,40 @@
 <html>
-<head>
-  <script type="text/javascript" src="//platform.linkedin.com/in.js">
+  <title>Resume-Create</title>
+  <meta name="viewport" content="width=1366, initial-scale=1" />
+  <head>
+    <link rel="icon" href="./favicon.png" />
+
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
       api_key: 811grlmasbvv75
-  </script>
-  <script>
-  window.onbeforeunload = function() {
-  return "Data will be lost if you leave the page, are you sure?";
-};
-  </script>
-</head>
-  <body >
+    </script>
+    <script>
+      // window.onbeforeunload = function() {
+      //   if (window.location.pathname == "/EditUser") {
+      //     return "Data will be lost if you leave the page, are you sure?";
+      //   } else {
+      //     return false;
+      //   }
+      // };
+      isSaved = false;
+    </script>
+  </head>
+  <body>
     <div id="root" class=""></div>
   </body>
-  <script  src="./build.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="./build.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link  rel="stylesheet" type="text/css" href="/stepZilla.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/stepZilla.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css"
+  />
 </html>

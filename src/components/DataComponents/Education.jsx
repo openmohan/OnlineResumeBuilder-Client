@@ -74,7 +74,6 @@ class Education extends React.Component{
     var count = this.state.education
     count = count.length;
     var education = this.state.education
-    console.log(education)
     return(
       <div>
         <div ref="EducationComponentMaster" className="" >
@@ -85,7 +84,6 @@ class Education extends React.Component{
 
             {(count > 0)?
               (education.map(function(single,index){
-                console.log(single)
                 return(
                   <SortableListItem
                     key={index}
@@ -124,9 +122,6 @@ class Education extends React.Component{
 
         },
         render: function(){
-          console.log("-----From single------")
-          console.log(this.props.education)
-          console.log("-----From single------")
           return(
             <div className="well well-lg" onChange={(event)=>this.updateEducationComponent(event,this.props.index)}>
               <div className="form-group">
@@ -136,8 +131,8 @@ class Education extends React.Component{
                 <label className="control-label col-sm-2" for="degree"> Degree :  </label><div className="col-sm-10"><input id="degree" className="form-control" type="email" placeholder="Degree B.Tech IT" type="text" value={_.get(this.props,'education.degree',"")} /></div>
               </div>
               <div className="form-group">
-                <label className="control-label col-sm-2" for={"start-date"}> Start date :  </label><div className="col-sm-4"><input id={"start-date"} className="form-control" type="text" placeholder="Start Date (DD/MM/YYYY)" value={_.get(this.props,'education.start-date',"")} /></div>
-                <label className="control-label col-sm-2" for={"end-date"}> End date :  </label><div className="col-sm-4"><input id={"end-date"} className="form-control" type="text" placeholder="End Date (DD/MM/YYYY)" value={_.get(this.props,'education.end-date',"")} /></div>
+                <label className="control-label col-sm-2" for={"start-date"}> Start date :  </label><div className="col-sm-4"><input id={"start-date"} className="form-control" type="text" placeholder="Start Date (YYYY-MM-DD)" value={_.get(this.props,'education.start-date',"")} /></div>
+                <label className="control-label col-sm-2" for={"end-date"}> End date :  </label><div className="col-sm-4"><input id={"end-date"} className="form-control" type="text" placeholder="End Date (YYYY-MM-DD)" value={_.get(this.props,'education.end-date',"")} /></div>
               </div>
               <div className="form-group">
                 <label className="control-label col-sm-2" for="percentage"> percentage :  </label><div className="col-sm-4"><input id="percentage" className="form-control" type="email" placeholder="Percentage % " type="text" value={_.get(this.props,'education.percentage',"")} /></div>

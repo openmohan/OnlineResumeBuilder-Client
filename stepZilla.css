@@ -1,6 +1,52 @@
 
 #root{
-  background: url('/assets/img/SignInActive.png') no-repeat -9999px -9999px;
+  background-color: #283E56;
+  color:white;
+  letter-spacing:0.5px;
+}
+.text-muted{
+  color:#65add7 !important
+}
+body{
+  background-color: #283E56;
+}
+.form-control{
+  border:1px solid #000;
+  color:#283E56;
+}
+.form-control:hover{
+  border:2px solid #3FB0E7
+}
+.form-control:active{
+  border:2px solid #9CDEFF
+}
+.form-control:focus{
+  border:3px solid #283E56
+}
+
+.well{
+  background-color: #0775AB;
+  border: 1px solid #0775AB;
+}
+.closeButton{
+  margin-bottom: 20;
+      padding-left: 20px;
+      padding-right: 17px;
+}
+.closeButtonImg{
+  cursor:pointer;
+}
+table th{
+  color:white
+}
+table tr {
+  color:#283E56;
+}
+table {
+  background-color: #0775AB
+}
+#skillTable{
+  margin-top: 15px
 }
 
 ol.progtrckr {
@@ -40,17 +86,17 @@ ol.progtrckr li span {
 
 ol.progtrckr li.progtrckr-todo {
   color: silver;
-  border-bottom: 4px solid silver;
+  border-bottom: 4px solid #9CDEFF;
 }
 
 ol.progtrckr li.progtrckr-doing {
-  color: black;
-  border-bottom: 4px solid #CCCCCC;
+  color: silver;
+  border-bottom: 4px solid #3FB0E7;
 }
 
 ol.progtrckr li.progtrckr-done {
-  color: black;
-  border-bottom: 4px solid #5cb85c;
+  color: white;
+  border-bottom: 4px solid #0775AB;
 }
 
 ol.progtrckr li:after {
@@ -66,27 +112,27 @@ ol.progtrckr li:before {
 
 ol.progtrckr li.progtrckr-todo:before {
   content: "\039F";
-  color: silver;
-  background-color: white;
+  color: #9CDEFF;
+  background-color: #283E56;
   width: 1.2em;
   line-height: 1.4em;
 }
 
 ol.progtrckr li.progtrckr-todo:hover:before {
-  color: #ff4500;
+  color: #3FB0E7;
 }
 
 ol.progtrckr li.progtrckr-doing:before {
   content: "\2022";
   color: white;
-  background-color: #CCCCCC;
+  background-color: #3FB0E7;
   width: 1.2em;
   line-height: 1.2em;
   border-radius: 1.2em;
 }
 
 ol.progtrckr li.progtrckr-doing:hover:before {
-  color: #ff4500;
+  color: #0775AB;
 }
 
 ol.progtrckr li.progtrckr-done:before {
@@ -129,7 +175,7 @@ body {
     display: block;
     width: 100%;
     text-align: center;
-    background: url('http://192.168.10.216:8080/assets/img/landingpage.jpg') no-repeat center center scroll;
+    background: url('/assets/img/landingpage.jpg') no-repeat center center scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;

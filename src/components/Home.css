@@ -16,3 +16,24 @@
 .LinkedInButtons:hover{
   content : url('/assets/img/SignInActive.png')
 }
+.githubProfile{
+  cursor: pointer;
+  content : url('/assets/img/github-sociocon.ico');
+}
+.in{
+  cursor: pointer;
+  content : url('/assets/img/in.ico');
+}
+.website{
+  cursor: pointer;
+  content : url('/assets/img/www.png');
+}
+.logo{
+  width:90px;
+  float:left;
+  display: inline;
+  margin-left:16px
+}
+.logoSet{
+  padding:33px 8px 4px 136px
+}

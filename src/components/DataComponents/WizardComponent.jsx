@@ -28,13 +28,13 @@ var WizardComponent = React.createClass({
           {name: 'Skills', component: <Skills user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
           {name: 'Projects', component: <Projects user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
           {name: 'Achivements', component: <Achivements user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
-          {name: 'Link', component: <LinkConfigurer user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
+          {name: 'Save', component: <LinkConfigurer user = {this.props.user} updateStoreData={this.props.updateStoreData}  />},
           {name: 'Final', component: <Final user = {this.props.user} updateStoreData={this.props.updateStoreData}  />}
         ]
 	return(
 			<div>
         <div className='step-progress'>
-            <StepZilla steps={steps} nextTextOnFinalActionStep = "Save"></StepZilla>
+            <StepZilla steps={steps} nextTextOnFinalActionStep = "Save" ></StepZilla>
         </div>
 		    </div>
 		)
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateStoreData : ((updates)=>dispatch(updateStoreData(updates)))
+    updateStoreData : ((updates)=>{isSaved=false; return dispatch(updateStoreData(updates))})
   }
 }
 

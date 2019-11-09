@@ -1,29 +1,38 @@
-import React from 'react'
-import {connect} from 'react-redux';
-var _ = require('lodash');
-import WizardComponent from './DataComponents/WizardComponent.jsx'
-
+import React from "react";
+import { connect } from "react-redux";
+var _ = require("lodash");
+import WizardComponent from "./DataComponents/WizardComponent.jsx";
+import { updateLoginInfo } from "../../actions/actions.js";
 
 var EditUser = React.createClass({
-	render : function(){
-	return(
-			<div className="container">
-				<WizardComponent ></WizardComponent>
-			</div>
-		)
-	}
-})
-
-
-const mapStateToProps = (state) => {
-  return {
-    user : state.user,
+  componentDidMount() {
+    // this.props.updateLoginInfo(this.props.location.query.code);
+  },
+  render: function() {
+    return (
+      <div className="container">
+        <WizardComponent />
+      </div>
+    );
   }
-}
+});
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = state => {
   return {
-  }
-}
+    user: state.user,
+    loginDetails: state.loginDetails
+  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditUser)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateLoginInfo: code => {
+      dispatch(updateLoginInfo(code));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditUser);
